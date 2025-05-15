@@ -1,0 +1,6 @@
+@NjalaHopitalAdmittedPatientRecords_HostAddress = http://localhost:5200
+
+GET {{NjalaHopitalAdmittedPatientRecords_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
