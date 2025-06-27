@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,12 +15,16 @@ public class AdmittedPatientRecordsController : ControllerBase
         _context = context;
     }
 
+    // 🔐 Require login to access all records
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AdmittedPatientRecord>>> GetAll()
     {
         return await _context.AdmittedPatientRecords.ToListAsync();
     }
 
+    // 🔐 Require login to access a specific record
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<ActionResult<AdmittedPatientRecord>> GetById(string id)
     {
@@ -29,6 +34,7 @@ public class AdmittedPatientRecordsController : ControllerBase
         return record;
     }
 
+    // 🔓 Allow anyone to create — remove [Authorize] if registration is open
     [HttpPost]
     public async Task<ActionResult<AdmittedPatientRecord>> Create(AdmittedPatientRecord record)
     {
@@ -38,6 +44,8 @@ public class AdmittedPatientRecordsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = record.ID }, record);
     }
 
+    // 🔐 Require login to update
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(string id, AdmittedPatientRecord record)
     {
@@ -61,6 +69,8 @@ public class AdmittedPatientRecordsController : ControllerBase
         return NoContent();
     }
 
+    // 🔐 Require login to delete
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(string id)
     {

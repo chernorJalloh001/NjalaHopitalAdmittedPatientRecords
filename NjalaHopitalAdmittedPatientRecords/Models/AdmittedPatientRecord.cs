@@ -1,6 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
+
+
+
 public class AdmittedPatientRecord
 {
     [Key]

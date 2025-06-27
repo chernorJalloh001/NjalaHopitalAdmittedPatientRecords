@@ -8,16 +8,15 @@ public class NjalaHopitalContext : DbContext
     }
 
     public DbSet<AdmittedPatientRecord> AdmittedPatientRecords { get; set; }
-    public DbSet<Login> Login { get; set; }
-
+    public DbSet<Registration> Register { get; set; } // Add this line
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Configure primary keys
-        modelBuilder.Entity<AdmittedPatientRecord>()
-            .HasKey(a => a.ID);
+        modelBuilder.Entity<Registration>().HasKey(u => u.Id);
 
-        modelBuilder.Entity<Login>()
-            .HasKey(l => l.UserName);
+        modelBuilder.Entity<Registration>().HasIndex(u => u.UserName).
+            IsUnique(); // optional but good
+
+
 
         base.OnModelCreating(modelBuilder);
     }
