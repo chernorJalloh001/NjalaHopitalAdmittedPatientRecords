@@ -23,6 +23,7 @@ namespace NjalaHopitalAdmittedPatientRecords.Controllers
             _configuration = configuration;
         }
 
+        
         // ✅ POST: api/Auth/Register
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterAsync([FromBody] Registration Register)
@@ -48,6 +49,7 @@ namespace NjalaHopitalAdmittedPatientRecords.Controllers
             }
         }
 
+        
         // ✅ POST: api/Auth/Login
         [HttpPost("Login")]
         public IActionResult Login([FromBody] LoginDto login)

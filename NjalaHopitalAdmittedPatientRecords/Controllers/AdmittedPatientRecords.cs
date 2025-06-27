@@ -34,6 +34,9 @@ public class AdmittedPatientRecordsController : ControllerBase
         return record;
     }
 
+
+    // 🔐 Require login to access all records
+    [Authorize]
     // 🔓 Allow anyone to create — remove [Authorize] if registration is open
     [HttpPost]
     public async Task<ActionResult<AdmittedPatientRecord>> Create(AdmittedPatientRecord record)
